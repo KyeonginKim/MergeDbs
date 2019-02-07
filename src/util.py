@@ -2,20 +2,17 @@ import argparse
 import sys
 
 
-def diff(rule_list1, rule_list2):
-    set_rule1 = set(rule_list1)
-    set_rule2 = set(rule_list2)
+def diff(destination, source):
+    set_des = set(destination)
+    set_source = set(source)
 
-    if set_rule1 > set_rule2:
-        return list(set_rule1 - set_rule2)
-    else:
-        return list(set_rule2 - set_rule1)
+    return list(set_source - set_des)
 
 
 def arg_parser():
     argp = argparse.ArgumentParser()
-    argp.add_argument('-d1', dest='db_path1', required=True)
-    argp.add_argument('-d2', dest='db_path2', required=True)
+    argp.add_argument('-d', dest='destination', required=True)
+    argp.add_argument('-s', dest='source', required=True)
 
     options = argp.parse_args(sys.argv[1:])
-    return options.db_path1, options.db_path2
+    return options.destination, options.source
